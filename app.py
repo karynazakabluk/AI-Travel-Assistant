@@ -171,5 +171,44 @@ def delete_booking(booking_id):
     connection.close()
 
     return redirect("/bookings")
+@app.route("/admin")
+def admin():
+
+    if "username" not in session or session["role"] != "admin":
+        return redirect("/login")
+
+    connection = sqlite3.connect("travel.db")
+    cursor = connection.cursor()
+
+    cursor.execute("SELECT * FROM bookings")
+    bookings = cursor.fetchall()
+
+    cursor.execute("SELECT COUNT(*) FROM bookings")
+    total_bookings = cursor.fetchone()[0]
+
+    cursor.execute("SELECT COUNT(*) FROM bookings WHERE region = 'Europe'")
+    europe_bookings = cursor.fetchone()[0]
+
+    cursor.execute("SELECT COUNT(*) FROM bookings WHERE region = 'Asia'")
+    asia_bookings = cursor.fetchone()[0]
+
+    cursor.execute("SELECT COUNT(*) FROM users")
+    total_users = cursor.fetchone()[0]
+
+    connection.close()
+
+    return render_template(
+        "admin.html",
+        bookings=bookings,
+        total_bookings=total_bookings,
+        europe_bookings=europe_bookings,
+        asia_bookings=asia_bookings,
+        total_users=total_users,
+        username=session.get("username"),
+        role=session.get("role")
+    )
+
+
+
 if __name__ == "__main__":
     app.run(debug=True, port=5004)
