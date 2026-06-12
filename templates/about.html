@@ -2,9 +2,60 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>About Project</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
 
+<header class="small-header">
+    {% include 'navbar.html' %}
+</header>
+
+<main>
+    <section class="section-title">
+    <h2>AI Travel Assistant</h2>
+    <p>A web project for travel booking, administration and AI-inspired recommendations</p>
+</section>
+
+    <section class="booking-list">
+
+        <div class="booking-card">
+            <h3>Purpose</h3>
+            <p>
+                The purpose of this system is to help users find, book and manage travel destinations.
+                The system combines booking functionality, user administration, database storage and
+                AI-inspired recommendations.
+            </p>
+        </div>
+
+        <div class="booking-card">
+            <h3>Technologies</h3>
+            <p><strong>Backend:</strong> Python Flask</p>
+            <p><strong>Frontend:</strong> HTML and CSS</p>
+            <p><strong>Database:</strong> SQLite</p>
+            <p><strong>Version control:</strong> Git / GitHub</p>
+        </div>
+
+        <div class="booking-card">
+            <h3>Security</h3>
+            <p>
+                The system uses login, sessions and role-based access control.
+                Users can only see and manage their own bookings, while administrators can manage all bookings.
+            </p>
+        </div>
+
+        <div class="booking-card">
+            <h3>AI Assistant</h3>
+            <p>
+                The assistant analyzes user input with keyword matching and scoring.
+                It recommends destinations based on region, price level and travel type.
+            </p>
+        </div>
+
+    </section>
+</main>
+<footer>
+    <p>AI Travel Assistant © 2026</p>
+</footer>
 </body>
 </html>
