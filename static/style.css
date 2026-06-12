@@ -249,3 +249,29 @@ footer {
     font-weight: bold;
     margin-top: 8px;
 }
+.action-row {
+    display: flex;
+    gap: 10px;
+    margin-top: 15px;
+    margin-left: 0;
+    justify-content: flex-start;
+}
+
+.action-btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 8px;
+    background: #243042;
+    color: white;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.action-btn.delete {
+    background: #8b2f2f;
+}
+
+.action-form {
+    margin: 0;
+}

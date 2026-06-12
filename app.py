@@ -153,5 +153,23 @@ def bookings():
         role=session.get("role")
     )
 
+@app.route("/delete/<int:booking_id>", methods=["POST"])
+def delete_booking(booking_id):
+
+    if "username" not in session:
+        return redirect("/login")
+
+    connection = sqlite3.connect("travel.db")
+    cursor = connection.cursor()
+
+    cursor.execute("""
+        DELETE FROM bookings
+        WHERE id = ? AND username = ?
+    """, (booking_id, session["username"]))
+
+    connection.commit()
+    connection.close()
+
+    return redirect("/bookings")
 if __name__ == "__main__":
     app.run(debug=True, port=5004)
