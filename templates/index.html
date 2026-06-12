@@ -1,13 +1,176 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>AI Travel Assistant</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Travel Booking Assistant</title>
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
 
-<h1>AI Travel Assistant</h1>
-<p>Flask is running.</p>
+<header>
+    {% include 'navbar.html' %}
+
+    <section class="hero">
+        <h1>Find Your Next Adventure</h1>
+        <p>Search for trips in Europe and Asia with an AI-inspired travel assistant.</p>
+
+        <form class="search-box" action="/assistant" method="POST">
+            <input
+                type="text"
+                name="travel_request"
+                placeholder="Example: I want a cheap beach trip in Asia"
+                required>
+            <button type="submit">Find Trip</button>
+        </form>
+    </section>
+</header>
+
+<main>
+
+    <section class="section-title">
+        <h2>Europe</h2>
+        <p>Discover cultural cities and beautiful beach destinations.</p>
+    </section>
+
+    <section class="trip-grid">
+
+        <div class="trip-card">
+            <img src="/static/images/athens.jpg" alt="Athens">
+            <h3>Athens, Greece</h3>
+            <p>5 Days · Flight + Hotel</p>
+            <p class="price">5500 NOK</p>
+
+            <form action="/book" method="POST">
+                <input type="hidden" name="destination" value="Athens, Greece">
+                <input type="hidden" name="region" value="Europe">
+                <input type="hidden" name="price" value="5500">
+                <input type="hidden" name="days" value="5">
+                <button type="submit">Book Now</button>
+            </form>
+        </div>
+
+        <div class="trip-card">
+            <img src="/static/images/santorini.jpg" alt="Santorini">
+            <h3>Santorini, Greece</h3>
+            <p>6 Days · Flight + Hotel</p>
+            <p class="price">7200 NOK</p>
+
+            <form action="/book" method="POST">
+                <input type="hidden" name="destination" value="Santorini, Greece">
+                <input type="hidden" name="region" value="Europe">
+                <input type="hidden" name="price" value="7200">
+                <input type="hidden" name="days" value="6">
+                <button type="submit">Book Now</button>
+            </form>
+        </div>
+
+        <div class="trip-card">
+            <img src="/static/images/rome.jpg" alt="Rome">
+            <h3>Rome, Italy</h3>
+            <p>4 Days · Flight + Hotel</p>
+            <p class="price">5200 NOK</p>
+
+            <form action="/book" method="POST">
+                <input type="hidden" name="destination" value="Rome, Italy">
+                <input type="hidden" name="region" value="Europe">
+                <input type="hidden" name="price" value="5200">
+                <input type="hidden" name="days" value="4">
+                <button type="submit">Book Now</button>
+            </form>
+        </div>
+
+        <div class="trip-card">
+            <img src="/static/images/ksamil.jpg" alt="Ksamil">
+            <h3>Ksamil, Albania</h3>
+            <p>7 Days · Flight + Hotel</p>
+            <p class="price">4800 NOK</p>
+
+            <form action="/book" method="POST">
+                <input type="hidden" name="destination" value="Ksamil, Albania">
+                <input type="hidden" name="region" value="Europe">
+                <input type="hidden" name="price" value="4800">
+                <input type="hidden" name="days" value="7">
+                <button type="submit">Book Now</button>
+            </form>
+        </div>
+
+    </section>
+
+    <section class="section-title">
+        <h2>Asia</h2>
+        <p>Explore modern cities, food culture and unique travel experiences.</p>
+    </section>
+
+    <section class="trip-grid">
+
+        <div class="trip-card">
+            <img src="/static/images/tokyo.jpg" alt="Tokyo">
+            <h3>Tokyo, Japan</h3>
+            <p>7 Days · Flight + Hotel</p>
+            <p class="price">12000 NOK</p>
+
+            <form action="/book" method="POST">
+                <input type="hidden" name="destination" value="Tokyo, Japan">
+                <input type="hidden" name="region" value="Asia">
+                <input type="hidden" name="price" value="12000">
+                <input type="hidden" name="days" value="7">
+                <button type="submit">Book Now</button>
+            </form>
+        </div>
+
+        <div class="trip-card">
+            <img src="/static/images/seoul.jpg" alt="Seoul">
+            <h3>Seoul, South Korea</h3>
+            <p>6 Days · Flight + Hotel</p>
+            <p class="price">9500 NOK</p>
+
+            <form action="/book" method="POST">
+                <input type="hidden" name="destination" value="Seoul, South Korea">
+                <input type="hidden" name="region" value="Asia">
+                <input type="hidden" name="price" value="9500">
+                <input type="hidden" name="days" value="6">
+                <button type="submit">Book Now</button>
+            </form>
+        </div>
+
+        <div class="trip-card">
+            <img src="/static/images/hanoi.jpg" alt="Hanoi">
+            <h3>Hanoi, Vietnam</h3>
+            <p>8 Days · Flight + Hotel</p>
+            <p class="price">8500 NOK</p>
+
+            <form action="/book" method="POST">
+                <input type="hidden" name="destination" value="Hanoi, Vietnam">
+                <input type="hidden" name="region" value="Asia">
+                <input type="hidden" name="price" value="8500">
+                <input type="hidden" name="days" value="8">
+                <button type="submit">Book Now</button>
+            </form>
+        </div>
+
+        <div class="trip-card">
+            <img src="/static/images/shanghai.jpg" alt="Shanghai">
+            <h3>Shanghai, China</h3>
+            <p>6 Days · Flight + Hotel</p>
+            <p class="price">9800 NOK</p>
+
+            <form action="/book" method="POST">
+                <input type="hidden" name="destination" value="Shanghai, China">
+                <input type="hidden" name="region" value="Asia">
+                <input type="hidden" name="price" value="9800">
+                <input type="hidden" name="days" value="6">
+                <button type="submit">Book Now</button>
+            </form>
+        </div>
+
+    </section>
+
+</main>
+
+<footer>
+    <p>AI Travel Assistant © 2026</p>
+</footer>
 
 </body>
 </html>

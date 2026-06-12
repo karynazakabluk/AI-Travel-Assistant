@@ -1,10 +1,19 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<nav>
+    <h2>AI Travel Assistant</h2>
 
-</body>
-</html>
+    <ul>
+        <li><a href="/">Home</a></li>
+        <li><a href="/bookings">My Bookings</a></li>
+        <li><a href="/about">About</a></li>
+
+        {% if role == "admin" %}
+            <li><a href="/admin">Admin Panel</a></li>
+        {% endif %}
+
+        <li><a href="/logout">Logout</a></li>
+
+        {% if username %}
+            <li class="user-badge">{{ username }}</li>
+        {% endif %}
+    </ul>
+</nav>
