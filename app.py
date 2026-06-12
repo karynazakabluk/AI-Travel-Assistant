@@ -352,7 +352,7 @@ def assistant():
                 "region": destination["region"],
                 "price": destination["price"],
                 "score": score,
-                "reason": "Matches your travel preferences."
+                "reason": "Matches your travel preferences"
             })
 
     recommendations = sorted(
@@ -368,21 +368,21 @@ def assistant():
                 "region": "Europe",
                 "price": 5200,
                 "score": 1,
-                "reason": "Popular cultural destination."
+                "reason": "Popular cultural destination"
             },
             {
                 "name": "Tokyo, Japan",
                 "region": "Asia",
                 "price": 12000,
                 "score": 1,
-                "reason": "Popular city destination."
+                "reason": "Popular city destination"
             },
             {
                 "name": "Santorini, Greece",
                 "region": "Europe",
                 "price": 7200,
                 "score": 1,
-                "reason": "Popular beach destination."
+                "reason": "Popular beach destination"
             }
         ]
 
@@ -393,10 +393,13 @@ def assistant():
         username=session.get("username"),
         role = session.get("role")
     )
-
-
-
-
+@app.route("/about")
+def about():
+    return render_template(
+        "about.html",
+        username=session.get("username"),
+        role=session.get("role")
+    )
 
 
 
