@@ -2,9 +2,35 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>AI Travel Assistant</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
+
+<header class="small-header">
+    {% include 'navbar.html' %}
+</header>
+
+<main>
+    <section class="section-title">
+        <h2>AI Travel Suggestions</h2>
+        <p>Your request: "{{ user_text }}"</p>
+    </section>
+
+    <section class="booking-list">
+
+        {% for item in recommendations %}
+        <div class="booking-card">
+            <h3>{{ item.name }}</h3>
+            <p><strong>Region:</strong> {{ item.region }}</p>
+            <p><strong>Estimated price:</strong> {{ item.price }} NOK</p>
+            <p><strong>AI match score:</strong> {{ item.score }}</p>
+            <p>{{ item.reason }}</p>
+        </div>
+        {% endfor %}
+
+    </section>
+</main>
 
 </body>
 </html>
