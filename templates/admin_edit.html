@@ -2,9 +2,52 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Admin Edit Booking</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
+
+<header class="small-header">
+    {% include 'navbar.html' %}
+</header>
+
+<main class="login-page">
+    <div class="login-card">
+
+        <h1>Edit Booking</h1>
+
+        <p>Admin can update any booking in the system.</p>
+
+        <form action="/admin/edit/{{ booking[0] }}" method="POST">
+
+            <input type="text"
+                   name="destination"
+                   value="{{ booking[2] }}"
+                   required>
+
+            <input type="text"
+                   name="region"
+                   value="{{ booking[3] }}"
+                   required>
+
+            <input type="number"
+                   name="price"
+                   value="{{ booking[4] }}"
+                   required>
+
+            <input type="number"
+                   name="days"
+                   value="{{ booking[5] }}"
+                   required>
+
+            <button type="submit">
+                Save Changes
+            </button>
+
+        </form>
+
+    </div>
+</main>
 
 </body>
 </html>
