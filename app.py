@@ -1,10 +1,110 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request, redirect, session
+import sqlite3
 
 app = Flask(__name__)
+app.secret_key = "exam_secret_key"
+
 
 @app.route("/")
 def home():
-    return render_template("index.html")
+    return render_template(
+        "index.html",
+        username=session.get("username"),
+        role=session.get("role")
+    )
+
+
+@app.route("/login", methods=["GET", "POST"])
+def login():
+    error = ""
+
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+
+        connection = sqlite3.connect("travel.db")
+        cursor = connection.cursor()
+
+        cursor.execute("""
+            SELECT * FROM users
+            WHERE username = ? AND password = ?
+        """, (username, password))
+
+        user = cursor.fetchone()
+        connection.close()
+
+        if user:
+            session["username"] = user[1]
+            session["role"] = user[3]
+            return redirect("/")
+        else:
+            error = "Wrong username or password"
+
+    return render_template(
+        "login.html",
+        error=error,
+        username=session.get("username"),
+        role=session.get("role")
+    )
+
+
+@app.route("/logout")
+def logout():
+    session.clear()
+    return redirect("/login")
+
+
+@app.route("/register", methods=["GET", "POST"])
+def register():
+    error = ""
+
+    if request.method == "POST":
+        username = request.form["username"]
+        password = request.form["password"]
+
+        if len(password) < 6:
+            error = "Password must be at least 6 characters long"
+            return render_template(
+                "register.html",
+                error=error,
+                username=session.get("username"),
+                role=session.get("role")
+            )
+
+        if password.isalpha():
+            error = "Password must contain at least one number"
+            return render_template(
+                "register.html",
+                error=error,
+                username=session.get("username"),
+                role=session.get("role")
+            )
+
+        connection = sqlite3.connect("travel.db")
+        cursor = connection.cursor()
+
+        try:
+            cursor.execute("""
+                INSERT INTO users (username, password, role)
+                VALUES (?, ?, ?)
+            """, (username, password, "user"))
+
+            connection.commit()
+            connection.close()
+
+            return redirect("/login")
+
+        except sqlite3.IntegrityError:
+            connection.close()
+            error = "Username already exists"
+
+    return render_template(
+        "register.html",
+        error=error,
+        username=session.get("username"),
+        role=session.get("role")
+    )
+
 
 if __name__ == "__main__":
     app.run(debug=True, port=5004)
