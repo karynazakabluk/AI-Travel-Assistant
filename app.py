@@ -105,6 +105,53 @@ def register():
         role=session.get("role")
     )
 
+@app.route("/book", methods=["POST"])
+def book():
+    if "username" not in session:
+        return redirect("/login")
+
+    destination = request.form["destination"]
+    region = request.form["region"]
+    price = request.form["price"]
+    days = request.form["days"]
+    username = session["username"]
+
+    connection = sqlite3.connect("travel.db")
+    cursor = connection.cursor()
+
+    cursor.execute("""
+        INSERT INTO bookings (username, destination, region, price, days)
+        VALUES (?, ?, ?, ?, ?)
+    """, (username, destination, region, price, days))
+
+    connection.commit()
+    connection.close()
+
+    return redirect("/bookings")
+
+
+@app.route("/bookings")
+def bookings():
+    if "username" not in session:
+        return redirect("/login")
+
+    connection = sqlite3.connect("travel.db")
+    cursor = connection.cursor()
+
+    cursor.execute("""
+        SELECT * FROM bookings
+        WHERE username = ?
+    """, (session["username"],))
+
+    bookings = cursor.fetchall()
+    connection.close()
+
+    return render_template(
+        "bookings.html",
+        bookings=bookings,
+        username=session.get("username"),
+        role=session.get("role")
+    )
 
 if __name__ == "__main__":
     app.run(debug=True, port=5004)

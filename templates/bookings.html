@@ -2,9 +2,64 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>My Bookings</title>
+    <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
+
+<header class="small-header">
+    {% include 'navbar.html' %}
+</header>
+
+<main>
+    <section class="section-title">
+        <h2>My Bookings</h2>
+        <p>You can view and cancel your own bookings.</p>
+    </section>
+
+    <section class="booking-list">
+
+        {% if bookings %}
+
+            {% for booking in bookings %}
+            <div class="booking-card">
+
+                <div class="booking-content">
+
+                    <div class="booking-info">
+
+                        <h3>{{ booking[2] }}</h3>
+
+                        <p><strong>Region:</strong> {{ booking[3] }}</p>
+                        <p><strong>Price:</strong> {{ booking[4] }} NOK</p>
+                        <p><strong>Duration:</strong> {{ booking[5] }} days</p>
+                        <p><strong>Booked:</strong> {{ booking[6] }}</p>
+
+                        <p class="status">Confirmed</p>
+
+                    </div>
+
+                    <img
+                        src="/static/images/{{ booking[2].split(',')[0].lower() }}.jpg"
+                        alt="{{ booking[2] }}"
+                        class="booking-image-small">
+
+                </div>
+
+            </div>
+            {% endfor %}
+
+        {% else %}
+
+            <div class="booking-card">
+                <h3>No bookings found</h3>
+                <p>You have not booked any trips yet.</p>
+            </div>
+
+        {% endif %}
+
+    </section>
+</main>
 
 </body>
 </html>

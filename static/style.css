@@ -204,3 +204,48 @@ footer {
     border-radius: 8px;
     font-weight: bold;
 }
+.small-header {
+    padding-bottom: 10px;
+}
+
+.booking-list {
+    width: 70%;
+    margin: auto;
+}
+
+.booking-card {
+    background: white;
+    margin-bottom: 20px;
+    padding: 25px 30px;
+    border-radius: 16px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+    max-width: 600px;
+    margin: 20px auto;
+}
+
+.booking-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.booking-info {
+    flex: 1;
+}
+
+.booking-image-small {
+    width: 140px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.status {
+    display: inline-block;
+    background: #e4f4e7;
+    color: #2f6b3f;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    margin-top: 8px;
+}
